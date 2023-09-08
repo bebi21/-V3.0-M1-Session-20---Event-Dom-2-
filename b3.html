@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài liệu</title>
+    <style>
+      #itemInput {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="itemInput" />
+    <button onclick="addItem()">Thêm</button>
+    <ul id="list"></ul>
+    <script>
+      let container = document.getElementById("list");
+      let itemInput = document.getElementById("itemInput");
+
+      function addItem() {
+        let content = itemInput.value;
+        // xét trường hợp  khi  người dùng chưa nhập
+        if (content !== "") {
+          // tìm hiểu về insertAdjacentHTML( các position của nó)
+          // chèn vào vị trí 
+          container.insertAdjacentHTML("beforeend", `<li>${content}</li>`);
+          // khi người dùng nhập  vào xong lấy dữ liệi in ra thì sẽ ép 
+          // kiểu nó thành rỗng để trở lại dạng  dữ liệu  bàn đầu 
+          itemInput.value = "";
+          itemInput.style.backgroundColor = ""; // Đặt lại màu nền
+        }
+      }
+      //  event oninput ; sự kiện oninput, tìm hiểu về phần này
+      itemInput.addEventListener("input", () => {
+        itemInput.style.backgroundColor = "white";
+      });
+    </script>
+  </body>
+</html>

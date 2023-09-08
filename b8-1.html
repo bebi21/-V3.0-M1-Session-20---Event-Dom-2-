@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Máy tính đơn giản</title>
+    <style>
+      input,
+      button {
+        font-size: 20px;
+        padding: 10px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Máy tính đơn giản</h2>
+    <input type="number" id="num1" />
+    <input type="number" id="num2" />
+    <br />
+    <button onclick="tinhToan('+')">Cộng</button>
+    <button onclick="tinhToan('-')">Trừ</button>
+    <button onclick="tinhToan('*')">Nhân</button>
+    <button onclick="tinhToan('/')">Chia</button>
+    <button onclick="reset()">AC</button>
+    <br />
+    <input type="text" id="result" readonly />
+
+    <script>
+      function tinhToan(phepToan) {
+        let num1 = +document.getElementById("num1").value;
+        let num2 = +document.getElementById("num2").value;
+        let result;
+
+        switch (phepToan) {
+          case "+":
+            result = num1 + num2;
+            break;
+          case "-":
+            result = num1 - num2;
+            break;
+          case "*":
+            result = num1 * num2;
+            break;
+          case "/":
+            result = num1 / num2;
+            break;
+        }
+
+        document.getElementById("result").value = result;
+      }
+
+      function reset() {
+        document.getElementById("num1").value = "";
+        document.getElementById("num2").value = "";
+        document.getElementById("result").value = "";
+      }
+    </script>
+  </body>
+</html>

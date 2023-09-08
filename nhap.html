@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách công việc cần làm</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <h3>Danh sách việc cần làm</h3>
+    <input type="text" name="newTodo" id="newTodo" />
+    <button id="addBtn">Thêm</button>
+    <ul id="todoList"></ul>
+    <script>
+      // Sử dụng document.addEventListener để chắc chắn rằng tất cả các phần tử HTML đã được tải
+
+      // Khai báo biến để lưu trữ danh sách công việc cần làm
+      let todoList = [];
+
+      // Lấy các phần tử HTML cần sử dụng
+      const newTodoInput = document.getElementById("newTodo");
+      const addBtn = document.getElementById("addBtn");
+      const todoListElement = document.getElementById("todoList");
+
+      // Khai báo biến để theo dõi hành động hiện tại (thêm mới hoặc cập nhật)
+      let currentAction = "create";
+      let currentTodoIndex;
+
+      // Hàm để hiển thị danh sách công việc cần làm
+      function renderTodoList() {
+        // Xóa danh sách công việc cũ trước khi hiển thị lại
+        todoListElement.innerHTML = "";
+
+        // Duyệt qua danh sách công việc và thêm chúng vào danh sách HTML
+        todoList.forEach((todo, index) => {
+          const todoItem = document.createElement("li");
+          todoItem.textContent = todo;
+
+          const editBtn = document.createElement("button");
+          editBtn.textContent = "Sửa";
+          editBtn.addEventListener("click", () => startUpdate(index));
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Xóa";
+          deleteBtn.addEventListener("click", () => deleteTodo(index));
+
+          todoItem.appendChild(editBtn);
+          todoItem.appendChild(deleteBtn);
+
+          todoListElement.appendChild(todoItem);
+        });
+      }
+
+      // Hàm để thêm mới công việc cần làm
+      function addNewTodo() {
+        const newTodoValue = newTodoInput.value.trim();
+
+        if (newTodoValue !== "") {
+          todoList.push(newTodoValue);
+          newTodoInput.value = "";
+          renderTodoList();
+        }
+      }
+
+      // Hàm để cập nhật công việc cần làm
+      function updateTodo() {
+        const updatedValue = newTodoInput.value;
+        todoList[currentTodoIndex] = updatedValue;
+        newTodoInput.value = "";
+        renderTodoList();
+        currentAction = "create";
+      }
+
+      // Hàm để bắt đầu cập nhật công việc cần làm
+      function startUpdate(index) {
+        newTodoInput.value = todoList[index];
+        currentAction = "update";
+        currentTodoIndex = index;
+      }
+
+      // Hàm để xóa công việc cần làm
+      function deleteTodo(index) {
+        todoList.splice(index, 1);
+        renderTodoList();
+      }
+
+      // Gắn trình nghe sự kiện cho nút Thêm
+      addBtn.addEventListener("click", () => {
+        if (currentAction === "create") {
+          addNewTodo();
+        } else {
+          updateTodo();
+        }
+      });
+
+      // Hiển thị danh sách công việc cần làm ban đầu
+      renderTodoList();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 5. Viết chương trình gồm một ô input và một thẻ
+         div dùng để hiển thị nội dung nhập vào ô input 
+         với ít nhất 3 cách khác nhau -->
+    <!-- 
+    <input type="text" id="myInput" oninput="myFunction()" />
+
+    <p id="demo"></p>
+
+    <script>
+      function myFunction() {
+        let text = document.getElementById("myInput").value;
+        document.getElementById("demo").innerHTML = "You wrote: " + text;
+      }
+    </script> -->
+
+    <input type="text" id="input" />
+    <div id="show"></div>
+
+    <script>
+      let input = document.getElementById("input");
+      let show = document.getElementById("show");
+      input.addEventListener("input", () => {
+        show.innerHTML = input.value;
+      });
+    </script>
+  </body>
+</html>
